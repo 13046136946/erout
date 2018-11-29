@@ -2,8 +2,8 @@
   <div class="read" v-show="show" :class="{active:active}" :id="id">
     <div class="read-content" :class="{active:active}">
       <div class="contents" :class="{act:act}">
-        <span class="btn_l" @click="dare"><img src="../public/img/fh.png">返回</span>
-        <span class="btn_l">{{id.title}}</span>
+        <span class="btn_l" @click="dare; $emit('close')"><img src="../public/img/fh.png">返回</span>
+        <span class="btn_l" style="margin-left: 30px">{{id.title}}</span>
         <span class="btn_r" @click="favoriteFunc">{{imager}}</span>
         <span></span>
       </div>
@@ -17,7 +17,7 @@
         <span @click="add">下一章</span>
       </div>
     </div>
-    <catalog v-show="shows" :id="id" @titlechange="updatetitle($event)"></catalog>
+    <catalog v-show="shows" :id="id.maleList.msg" @title="updatetitle" @close="next"></catalog>
   </div>
 
 </template>
@@ -32,7 +32,6 @@
         active: false,
         act: false,
         num: 0,
-        msg: this.$route.params.id.maleList.msg,
         id: this.$route.params.id,
         maleList: {
           type: Array,
@@ -42,10 +41,11 @@
     },
     methods: {
       updatetitle(title) {
-        this.id.maleList.msg = title
+        this.num = title
       },
       dare() {
         this.show = !this.show
+        console.log(this.show)
       },
       favoriteFunc() {
         this.shower = !this.shower

@@ -7,8 +7,8 @@
       </div>
       <div class="content">
         <ul>
-          <li class="cont" v-for="(title,index) in id.maleList" :key="index" @click="read">
-              <div class="tie">{{title.title}}</div>
+          <li class="cont" v-for="(title,index) in id.maleList" :key="index" @click="read(index); $emit('close')">
+            <div class="tie">{{title.title}}</div>
           </li>
         </ul>
       </div>
@@ -20,11 +20,8 @@
   export default {
     data() {
       return {
-        shows: false,
-        show: false,
+        shows: true,
         active: false,
-        shower: false,
-        msg: this.$route.params.id.maleList.msg,
         id: this.$route.params.id,
         maleList: {
           type: Array,
@@ -34,10 +31,10 @@
     },
     methods: {
       dare() {
-        this.shows = !this.shows
+        this.shows = false
       },
-      read(msg) {
-        this.$emit('titlechange', this.msg)
+      read(index) {
+        this.$emit('title', index)
       }
     }
   }

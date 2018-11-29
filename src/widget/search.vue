@@ -6,16 +6,18 @@
       <button>搜索</button>
     </div>
     <Split></Split>
-    <ul >
-    <li v-for="(title,index) in filterFriendsList" :key="index">
-      <span class="img"><img :src="title.cover"></span>
-      <span class="title">
+    <ul>
+      <li v-for="(title,index) in filterFriendsList" :key="index" @click="to(title)">
+        <span class="img"><img :src="title.cover"></span>
+        <span class="title">
           <div>{{title.title}}</div>
           <div class="title">{{title.intro}}</div>
           <span>作者名：{{title.author}}</span>
-      </span>
-    </li>
-  </ul>
+          <span style="color: #737373; font-size: 14px; float: right;margin-right: 50px;
+           border: 1px solid #ccc; margin-top: 10px;width: 28px;height: 18px;line-height: 18px;">{{title.catName}}</span>
+        </span>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -38,21 +40,7 @@
             this.friendsList = res.data
           }
         })
-      this.axios('/api/fireList')
-        .then(res => {
-          res = res.data
-          if (res.error === 0) {
-            this.friendsList = res.data
-          }
-        })
-      this.axios('/api/fmaleList')
-        .then(res => {
-          res = res.data
-          if (res.error === 0) {
-            this.friendsList = res.data
-          }
-        })
-  },
+    },
     computed: {
       filterFriendsList() {
         // 只根据用户名查询
@@ -67,6 +55,11 @@
           return reg.test(f.title)
         })
         return result
+      }
+    },
+    methods: {
+      to(title) {
+        this.$router.push({name: 'details', params: {id: title}})
       }
     },
     components: {

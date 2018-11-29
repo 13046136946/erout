@@ -1,6 +1,6 @@
 <template>
   <div class="contents">
-    <readBook v-show="show" :id="id"></readBook>
+    <readBook v-show="show" :id="id" @close="favoriteFunc1"></readBook>
     <Regresses></Regresses>
     <span class="free">书籍详情</span>
     <div class="detail">
