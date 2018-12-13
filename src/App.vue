@@ -84,4 +84,6 @@
 </script>
 
 <style lang="sass" rel="stylesheet/scss" scoped>
+  #app
+    width: 100%
 </style>

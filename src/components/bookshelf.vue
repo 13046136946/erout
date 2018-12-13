@@ -11,8 +11,19 @@
         <span class="text">领书豆</span>
       </div>
     </div>
-    <div class="contents">
-      <span class="add" @click="toC()">+</span>
+    <ul >
+      <li class="title" v-for="(total,index) in total" :key="index">
+        <img :src="total.cover">
+        <span class="tit">
+      <div class="span">
+        {{total.title}}
+      </div>
+      {{total.author}}
+    </span>
+      </li>
+    </ul>
+    <div class="contents" @click="toC">
+      <span class="add">+</span>
       <span>添加小说</span>
     </div>
   </div>
@@ -22,7 +33,16 @@
     props: {
       hotList: {
         type: Array,
-        required: true
+        required: true,
+        imgArray: {
+          type: Array,
+          default: []
+        }
+      }
+    },
+    data() {
+      return {
+        total: JSON.parse(window.localStorage.getItem('arr'))
       }
     },
     methods: {
@@ -75,13 +95,40 @@
           position: absolute
           top: 10px
           left: 28px
+    .title
+      display: inline-block
+      margin-left: 5px
+      &:after
+        display: block
+        content: ' '
+        clear: both
+      img
+        width: 80px
+        height: 120px
+        float: left
+      .tit
+        margin: 15px 84px
+        .span
+          width: 330px
+          margin-bottom: 10px
+    ul .cont
+      .img
+        &:after
+          display: block
+          content: ' '
+          clear: both
+      .img img
+        width: 80px
+        height: 120px
+        float: left
+      .tit
+        margin-top: 5px
+        line-height: 30px
     .contents
-      position: fixed
-      top: 165px
-      bottom: 46px
       width: 100%
       height: 100px
       line-height: 80px
+      margin-left: 5px
       .add
         width: 50px
         height: 80px
@@ -89,4 +136,5 @@
         display: inline-block
         border: 1px solid #000
         text-align: center
+        margin-top: 5px
 </style>

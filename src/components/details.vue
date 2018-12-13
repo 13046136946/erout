@@ -20,7 +20,7 @@
     </div>
     <div class="btn">
       <div class="btn_a btn_s" :class="{active: favoriter}" @click="favoriteFunc1(false)">{{favoriteText1}}</div>
-      <div class="btn_a" @click="favoriteFunc" :class="{active: favorite}">{{favoriteText}}</div>
+      <div class="btn_a" @click="favoriteFunc" @close="favoriteFunc" :class="{active: favorite}">{{favoriteText}}</div>
       <div class="btn_a" @click="favoriteFunc2">{{favoriteText2}}</div>
     </div>
     <div class="brief">{{id.intro}}</div>
@@ -71,7 +71,8 @@
         favorite: false,
         favoriter: false,
         favorites: false,
-        show: false
+        show: false,
+        data: []
       }
     },
     computed: {
@@ -88,6 +89,15 @@
     methods: {
       favoriteFunc() {
         this.favorite = true
+        if (this.favorite) {
+          let temp = JSON.parse(localStorage.getItem('arr')) || []
+          this.data = JSON.parse(localStorage.getItem('arr'))
+            if (temp.indexOf(temp.id) === -1) {
+              temp.push(this.id)
+            }
+          window.localStorage.setItem('arr', JSON.stringify(temp))
+//          console.log(JSON.parse(window.localStorage.getItem('arr')))
+        }
       },
       favoriteFunc1() {
         this.show = !this.show

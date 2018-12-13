@@ -45,7 +45,7 @@
       },
       dare() {
         this.show = !this.show
-        console.log(this.show)
+//        console.log(this.show)
       },
       favoriteFunc() {
         this.shower = !this.shower
@@ -88,6 +88,7 @@
     top: 0
     left: 0
     z-index: 5
+    line-height: 30px
     &.active
       background: #363636
       color: #ccc

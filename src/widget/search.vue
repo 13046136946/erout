@@ -7,11 +7,11 @@
     </div>
     <Split></Split>
     <ul>
-      <li v-for="(title,index) in filterFriendsList" :key="index" @click="to(title)">
+      <li v-for="(title,index) in filterFriendsList" :key="index" @click="to(title)" class="clear-fix">
         <span class="img"><img :src="title.cover"></span>
         <span class="title">
-          <div>{{title.title}}</div>
-          <div class="title">{{title.intro}}</div>
+          <span>{{title.title}}</span>
+          <span class="title titles">{{title.intro}}</span>
           <span>作者名：{{title.author}}</span>
           <span style="color: #737373; font-size: 14px; float: right;margin-right: 50px;
            border: 1px solid #ccc; margin-top: 10px;width: 28px;height: 18px;line-height: 18px;">{{title.catName}}</span>
@@ -84,9 +84,15 @@
         width: 50px
         height: 34px
     ul
-      margin-top: -40px
       li
-        margin-top: 44px
+        margin-top: 10px
+        width: 100%
+      .clear-fix
+        display: inline-block
+        &:after
+          display: block
+          content: ' '
+          clear: both
         .img img
           width: 95px
           height: 140px
@@ -94,8 +100,13 @@
           float: left
         .title
           display: block
+          line-height: 35px
           white-space: nowrap
           overflow: hidden
           text-overflow: ellipsis
-          line-height: 35px
+          .titles
+            display: block
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
 </style>
